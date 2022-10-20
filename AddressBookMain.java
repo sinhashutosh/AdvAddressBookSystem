@@ -49,11 +49,10 @@ public class AddressBookMain {
                     String tempFirstName = sc.next();
                     ContactOperation contactOperation1 = new ContactOperation();
                     contactOperation1.deleteContact(tempFirstName, list);
-
+                    break;
             }
         }
     }
-
 
 
     public static int availableChoice() {
