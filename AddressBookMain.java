@@ -56,8 +56,13 @@ public class AddressBookMain {
                     contactOperation.editContact(tempAddressBook, contactsHashMap);
                     break;
                 case 4:
+<<<<<<< HEAD
                     System.out.println("Enter Address book name whose detail you want to remove");
                     String tempAddressBookName = sc.next();
+=======
+                    System.out.println("Enter First Name of Contact whose detail you want to remove");
+                    String tempFirstName = sc.next();
+>>>>>>> 98fa67c8fbddfc3adaa24101032afd2fcbbc1b0d
                     ContactOperation contactOperation1 = new ContactOperation();
                     contactOperation1.deleteContact(tempAddressBookName, contactsHashMap);
                     break;
