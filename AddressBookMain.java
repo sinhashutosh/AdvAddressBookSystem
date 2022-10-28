@@ -45,7 +45,7 @@ public class AddressBookMain {
                     contactOperation.editContact(tempName, list);
                     break;
                 case 4:
-                    System.out.println("Enter First Name of Contact whose detail you want to edit");
+                    System.out.println("Enter First Name of Contact whose detail you want to remove");
                     String tempFirstName = sc.next();
                     ContactOperation contactOperation1 = new ContactOperation();
                     contactOperation1.deleteContact(tempFirstName, list);
