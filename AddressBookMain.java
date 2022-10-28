@@ -1,7 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -10,7 +9,8 @@ public class AddressBookMain {
     public static void main(String[] args) {
         int choice;
         System.out.println("Welcome Address Book");
-        List<Contacts> list = new ArrayList<>();
+       // List<Contacts> list = new ArrayList<>();
+        HashMap<String, Contacts> contactsHashMap = new HashMap<>();
 
         while (true) {
             choice = availableChoice();
@@ -19,6 +19,8 @@ public class AddressBookMain {
                     System.exit(0);
                 case 1:
                     Contacts contacts;
+                    System.out.println("Enter address book Name");
+                    String addressBookName = sc.next();
                     System.out.println("Enter First Name ");
                     String firstName = sc.next();
                     System.out.println("Enter Last Name ");
@@ -33,22 +35,31 @@ public class AddressBookMain {
                     String phonenumber = sc.next();
                     System.out.println("Enter Email Id");
                     String email = sc.next();
-                    list.add(new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+                    if (contactsHashMap.containsKey(addressBookName)) {
+                        System.out.println("AddressBookName Already exists");
+                        System.out.println("Enter Another Name Which is not Available in following list");
+                        System.out.println(contactsHashMap.keySet());
+                        addressBookName = sc.next();
+                        contactsHashMap.put(addressBookName,new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+
+                    } else {
+                        contactsHashMap.put(addressBookName,new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+                    }
                     break;
                 case 2:
-                    System.out.println(list);
+                    System.out.println(contactsHashMap);
                     break;
                 case 3:
-                    System.out.println("Enter First Name of Contact whose detail you want to edit");
-                    String tempName = sc.next();
+                    System.out.println("Enter Address book name whose detail you want to edit");
+                    String tempAddressBook = sc.next();
                     ContactOperation contactOperation = new ContactOperation();
-                    contactOperation.editContact(tempName, list);
+                    contactOperation.editContact(tempAddressBook, contactsHashMap);
                     break;
                 case 4:
-                    System.out.println("Enter First Name of Contact whose detail you want to edit");
-                    String tempFirstName = sc.next();
+                    System.out.println("Enter Address book name whose detail you want to remove");
+                    String tempAddressBookName = sc.next();
                     ContactOperation contactOperation1 = new ContactOperation();
-                    contactOperation1.deleteContact(tempFirstName, list);
+                    contactOperation1.deleteContact(tempAddressBookName, contactsHashMap);
                     break;
             }
         }
