@@ -1,11 +1,45 @@
 package org.example;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class ContactOperation {
     static Scanner sc = new Scanner(System.in);
+
+    public static void addContact(HashMap contactHashMap) {
+        System.out.println("Enter address book Name");
+        String addressBookName = sc.next();
+        System.out.println("Enter First Name ");
+        String firstName = sc.next();
+        contactHashMap.entrySet().stream().forEach(p -> {
+            if (p.equals(firstName)) {
+                System.out.println("Contact Already Exists");
+                return;
+            }
+        });
+        System.out.println("Enter Last Name ");
+        String lastName = sc.next();
+        System.out.println("Enter City ");
+        String city = sc.next();
+        System.out.println("Enter State ");
+        String state = sc.next();
+        System.out.println("Enter Pin Code");
+        String zip = sc.next();
+        System.out.println("Enter Mobile Number");
+        String phonenumber = sc.next();
+        System.out.println("Enter Email Id");
+        String email = sc.next();
+        if (contactHashMap.containsKey(addressBookName)) {
+            System.out.println("AddressBookName Already exists");
+            System.out.println("Enter Another Name Which is not Available in following list");
+            System.out.println(contactHashMap.keySet());
+            addressBookName = sc.next();
+            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+        } else {
+            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+        }
+
+    }
 
     public static void editContact(String tempAddressBook, HashMap contactHashMap) {
         if (contactHashMap.size() > 0) {
@@ -50,7 +84,7 @@ public class ContactOperation {
                             break;
                     }
                     contactHashMap.put(tempAddressBook, contacts);
-                    System.exit(0);
+                    return;
                 }
             }
         } else {
