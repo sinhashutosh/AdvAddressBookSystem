@@ -35,7 +35,29 @@ public class AddressBookMain {
                     ContactOperation contactOperation1 = new ContactOperation();
                     contactOperation1.deleteContact(tempAddressBookName, contactsHashMap);
                     break;
+                case 5:
+                    searchBy(contactsHashMap);
+                    break;
             }
+        }
+    }
+
+    private static void searchBy(HashMap<String,Contacts> contactHashMap) {
+        System.out.println("Choose any number from (1-2) for searching");
+        System.out.println("1. By City");
+        System.out.println("2. By State");
+        int choice = sc.nextInt();
+        ContactOperation contactOperation = new ContactOperation();
+        switch (choice) {
+            case 1:
+                contactOperation.searchByCity(contactHashMap);
+                break;
+            case 2:
+               contactOperation.searchByState(contactHashMap);
+               break;
+            default:
+                System.out.println("Invalid Choice");
+                break;
         }
     }
 
@@ -47,6 +69,7 @@ public class AddressBookMain {
         System.out.println("2. View Contact.");
         System.out.println("3. Edit Contact");
         System.out.println("4. Delete Contact");
+        System.out.println("5. Searching");
         return sc.nextInt();
     }
 }

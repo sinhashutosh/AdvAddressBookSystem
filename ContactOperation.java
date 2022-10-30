@@ -1,42 +1,79 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ContactOperation {
+    static String firstName;
+    static String lastName;
+    static String city;
+    static String state;
+    static String zip;
+    static String phoneNumber;
+    static String email;
     static Scanner sc = new Scanner(System.in);
+    public static String getFirstName() {
+        return firstName;
+    }
+
+    public static String getLastName() {
+        return lastName;
+    }
+
+    public static String getCity() {
+        return city;
+    }
+
+    public static String getState() {
+        return state;
+    }
+
+    public static String getZip() {
+        return zip;
+    }
+
+    public static String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
+
+
+
 
     public static void addContact(HashMap contactHashMap) {
         System.out.println("Enter address book Name");
         String addressBookName = sc.next();
         System.out.println("Enter First Name ");
-        String firstName = sc.next();
-        contactHashMap.entrySet().stream().forEach(p -> {
+        firstName = sc.next();
+        contactHashMap.values().stream().forEach(p -> {
             if (p.equals(firstName)) {
                 System.out.println("Contact Already Exists");
                 return;
             }
         });
         System.out.println("Enter Last Name ");
-        String lastName = sc.next();
+        lastName = sc.next();
         System.out.println("Enter City ");
-        String city = sc.next();
+        city = sc.next();
         System.out.println("Enter State ");
-        String state = sc.next();
+        state = sc.next();
         System.out.println("Enter Pin Code");
-        String zip = sc.next();
+        zip = sc.next();
         System.out.println("Enter Mobile Number");
-        String phonenumber = sc.next();
+        phoneNumber = sc.next();
         System.out.println("Enter Email Id");
-        String email = sc.next();
+        email = sc.next();
         if (contactHashMap.containsKey(addressBookName)) {
             System.out.println("AddressBookName Already exists");
             System.out.println("Enter Another Name Which is not Available in following list");
             System.out.println(contactHashMap.keySet());
             addressBookName = sc.next();
-            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phoneNumber, email));
         } else {
-            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phonenumber, email));
+            contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phoneNumber, email));
         }
 
     }
@@ -97,6 +134,32 @@ public class ContactOperation {
             contactHashMap.remove(tempFirstName);
         } else {
             System.out.println("No such Address Book found...");
+        }
+    }
+
+    public void searchByCity(HashMap<String,Contacts> contactHashMap) {
+        System.out.println("Enter the City Whose Person Detail You Want To Search");
+        String requirdCity = sc.next();
+        List listByCity = contactHashMap.values().stream().filter(p->p.city.equals(requirdCity)).collect(Collectors.toList());
+
+        if (listByCity.isEmpty()) {
+            System.out.println("No Such contact Found");
+            return;
+        } else {
+            System.out.println(listByCity);
+        }
+    }
+
+    public void searchByState(HashMap<String,Contacts> contactHashMap) {
+        System.out.println("Enter the State Whose Person Detail You Want To Search");
+        String requirdState = sc.next();
+        List listByState = contactHashMap.values().stream().filter(p->p.state.equals(requirdState)).collect(Collectors.toList());
+
+        if (listByState.isEmpty()) {
+            System.out.println("No Such contact Found");
+            return;
+        } else {
+            System.out.println(listByState);
         }
     }
 }
