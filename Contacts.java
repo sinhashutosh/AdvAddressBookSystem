@@ -7,6 +7,19 @@ public class Contacts {
     String state;
     String zip;
     String phonenumber;
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
     String email;
 
     public String getFirstName() {

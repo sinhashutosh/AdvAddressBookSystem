@@ -207,11 +207,27 @@ public class ContactOperation {
         }
     }
 
-    public void sortingByPersonName(HashMap<String, Contacts> contactsHashMap) {
-        List<Contacts> list = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
-        Iterator itr = list.iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
+    public void sort(HashMap<String, Contacts> contactsHashMap) {
+        System.out.println("Choose (1-4) from following option");
+        System.out.println("1. First Name\n2. City\n3. State\n4. Zip Code");
+        int choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                List<Contacts> listbyName = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
+                System.out.println(listbyName);
+                break;
+            case 2:
+                List<Contacts> listbyCity = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getCity().compareTo(secondPerson.getCity())).collect(Collectors.toList());
+                System.out.println(listbyCity);
+                break;
+            case 3:
+                List<Contacts> listbyState = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getState().compareTo(secondPerson.getState())).collect(Collectors.toList());
+                System.out.println(listbyState);
+                break;
+            case 4:
+                List<Contacts> listByZipCode = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getZip().compareTo(secondPerson.getZip())).collect(Collectors.toList());
+                System.out.println(listByZipCode);
+                break;
         }
     }
 }

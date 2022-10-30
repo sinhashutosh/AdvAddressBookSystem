@@ -52,7 +52,10 @@ public class AddressBookMain {
                     break;
                 case 9:
                     ContactOperation sortDetail = new ContactOperation();
-                    sortDetail.sortingByPersonName(contactsHashMap);
+                    sortDetail.sort(contactsHashMap);
+                    break;
+                default:
+                    System.out.println("Wrong Input!");
                     break;
             }
         }
@@ -90,6 +93,7 @@ public class AddressBookMain {
         System.out.println("7. View Persion By State");
         System.out.println("8. Get Person Mobile Number");
         System.out.println("9. Sorting by Person Name");
+        System.out.println("10. Sorting by city or state or zip");
         return sc.nextInt();
     }
 }
