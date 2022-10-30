@@ -9,6 +9,10 @@ public class Contacts {
     String phonenumber;
     String email;
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public Contacts(String firstName, String lastName, String city, String state, String zip, String phonenumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;

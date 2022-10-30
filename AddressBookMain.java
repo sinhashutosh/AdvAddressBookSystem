@@ -50,6 +50,10 @@ public class AddressBookMain {
                     ContactOperation getNumber = new ContactOperation();
                     getNumber.getNumber(contactsHashMap);
                     break;
+                case 9:
+                    ContactOperation sortDetail = new ContactOperation();
+                    sortDetail.sortingByPersonName(contactsHashMap);
+                    break;
             }
         }
     }
@@ -85,6 +89,7 @@ public class AddressBookMain {
         System.out.println("6. View Persion By City");
         System.out.println("7. View Persion By State");
         System.out.println("8. Get Person Mobile Number");
+        System.out.println("9. Sorting by Person Name");
         return sc.nextInt();
     }
 }

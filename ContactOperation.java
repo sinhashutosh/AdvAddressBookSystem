@@ -206,4 +206,12 @@ public class ContactOperation {
             System.out.println("Number of person are = " + number.size());
         }
     }
+
+    public void sortingByPersonName(HashMap<String, Contacts> contactsHashMap) {
+        List<Contacts> list = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
+        Iterator itr = list.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
 }
