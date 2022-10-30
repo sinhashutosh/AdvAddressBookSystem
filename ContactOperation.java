@@ -12,6 +12,7 @@ public class ContactOperation {
     static String phoneNumber;
     static String email;
     static Scanner sc = new Scanner(System.in);
+
     public static String getFirstName() {
         return firstName;
     }
@@ -39,8 +40,6 @@ public class ContactOperation {
     public static String getEmail() {
         return email;
     }
-
-
 
 
     public static void addContact(HashMap contactHashMap) {
@@ -137,10 +136,10 @@ public class ContactOperation {
         }
     }
 
-    public void searchByCity(HashMap<String,Contacts> contactHashMap) {
+    public void searchByCity(HashMap<String, Contacts> contactHashMap) {
         System.out.println("Enter the City Whose Person Detail You Want To Search");
         String requirdCity = sc.next();
-        List listByCity = contactHashMap.values().stream().filter(p->p.city.equals(requirdCity)).collect(Collectors.toList());
+        List listByCity = contactHashMap.values().stream().filter(p -> p.city.equals(requirdCity)).collect(Collectors.toList());
 
         if (listByCity.isEmpty()) {
             System.out.println("No Such contact Found");
@@ -150,16 +149,45 @@ public class ContactOperation {
         }
     }
 
-    public void searchByState(HashMap<String,Contacts> contactHashMap) {
+    public void searchByState(HashMap<String, Contacts> contactHashMap) {
         System.out.println("Enter the State Whose Person Detail You Want To Search");
         String requirdState = sc.next();
-        List listByState = contactHashMap.values().stream().filter(p->p.state.equals(requirdState)).collect(Collectors.toList());
+        List listByState = contactHashMap.values().stream().filter(p -> p.state.equals(requirdState)).collect(Collectors.toList());
 
         if (listByState.isEmpty()) {
             System.out.println("No Such contact Found");
             return;
         } else {
             System.out.println(listByState);
+        }
+    }
+
+    public void viewByCity(HashMap<String, Contacts> contactHashMap) {
+        System.out.println("Enter City whose person's name you want to fetch");
+        String requirdCity = sc.next();
+        List<Contacts> listbyCity = contactHashMap.values().stream().filter(p -> p.city.equals(requirdCity)).collect(Collectors.toList());
+
+        if (listbyCity.isEmpty()) {
+            System.out.println("No Such contact Found");
+            return;
+        } else {
+            for (int i = 0; i < listbyCity.size(); i++) {
+                System.out.println("Name = " + listbyCity.get(i).firstName + " " + listbyCity.get(i).lastName);
+            }
+        }
+    }
+
+    public void viewByState(HashMap<String, Contacts> contactsHashMap) {
+        System.out.println("Enter State whose person you want to fetch");
+        String requirdState = sc.next();
+        List<Contacts> listByState = contactsHashMap.values().stream().filter(p -> p.state.equals(requirdState)).collect(Collectors.toList());
+        if (listByState.isEmpty()) {
+            System.out.println("No Such contact Found");
+            return;
+        } else {
+            for (int i = 0; i < listByState.size(); i++) {
+                System.out.println("Name = " + listByState.get(i).firstName + " " + listByState.get(i).lastName);
+            }
         }
     }
 }
