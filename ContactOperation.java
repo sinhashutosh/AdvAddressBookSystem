@@ -190,4 +190,20 @@ public class ContactOperation {
             }
         }
     }
+
+    public void getNumber(HashMap<String, Contacts> contactsHashMap) {
+        System.out.println("Enter City or State to get Contact Number ");
+        String cityOrState = sc.next();
+        List<Contacts> number = contactsHashMap.values().stream().filter(p -> p.city.equals(cityOrState) || p.state.equals(cityOrState)).collect(Collectors.toList());
+        if (number.isEmpty()) {
+            System.out.println("No Such contact Found");
+            System.out.println("Number of person are = " + number.size());
+            return;
+        } else {
+            for (int i = 0; i < number.size(); i++) {
+                System.out.println("Mobile Number = " + number.get(i).phonenumber);
+            }
+            System.out.println("Number of person are = " + number.size());
+        }
+    }
 }

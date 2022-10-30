@@ -46,6 +46,10 @@ public class AddressBookMain {
                     ContactOperation viewByState = new ContactOperation();
                     viewByState.viewByState(contactsHashMap);
                     break;
+                case 8:
+                    ContactOperation getNumber = new ContactOperation();
+                    getNumber.getNumber(contactsHashMap);
+                    break;
             }
         }
     }
@@ -80,6 +84,7 @@ public class AddressBookMain {
         System.out.println("5. Searching");
         System.out.println("6. View Persion By City");
         System.out.println("7. View Persion By State");
+        System.out.println("8. Get Person Mobile Number");
         return sc.nextInt();
     }
 }
