@@ -6,19 +6,18 @@ import java.util.Scanner;
 public class AddressBookMain {
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int choice;
         System.out.println("Welcome Address Book");
         HashMap<String, Contacts> contactsHashMap = new HashMap<>();
-
+        ContactOperation contacts = new ContactOperation();
         while (true) {
             choice = availableChoice();
             switch (choice) {
                 case 0:
                     System.exit(0);
                 case 1:
-                    ContactOperation contactsEntry = new ContactOperation();
-                    contactsEntry.addContact(contactsHashMap);
+                    ContactOperation.addContact(contactsHashMap);
                     break;
                 case 2:
                     System.out.println(contactsHashMap);
@@ -26,33 +25,30 @@ public class AddressBookMain {
                 case 3:
                     System.out.println("Enter Address book name whose detail you want to edit");
                     String tempAddressBook = sc.next();
-                    ContactOperation contactOperation = new ContactOperation();
-                    contactOperation.editContact(tempAddressBook, contactsHashMap);
+                    ContactOperation.editContact(tempAddressBook, contactsHashMap);
                     break;
                 case 4:
                     System.out.println("Enter Address book name whose detail you want to remove");
                     String tempAddressBookName = sc.next();
-                    ContactOperation contactOperation1 = new ContactOperation();
-                    contactOperation1.deleteContact(tempAddressBookName, contactsHashMap);
+                    ContactOperation.deleteContact(tempAddressBookName, contactsHashMap);
                     break;
                 case 5:
                     searchBy(contactsHashMap);
                     break;
                 case 6:
-                    ContactOperation viewByCity = new ContactOperation();
-                    viewByCity.viewByCity(contactsHashMap);
+                    contacts.viewByCity(contactsHashMap);
                     break;
                 case 7:
-                    ContactOperation viewByState = new ContactOperation();
-                    viewByState.viewByState(contactsHashMap);
+                    contacts.viewByState(contactsHashMap);
                     break;
                 case 8:
-                    ContactOperation getNumber = new ContactOperation();
-                    getNumber.getNumber(contactsHashMap);
+                    contacts.getNumber(contactsHashMap);
                     break;
                 case 9:
-                    ContactOperation sortDetail = new ContactOperation();
-                    sortDetail.sort(contactsHashMap);
+                    contacts.sort(contactsHashMap);
+                    break;
+                case 10:
+                    contacts.vewAddressBook();
                     break;
                 default:
                     System.out.println("Wrong Input!");
@@ -93,7 +89,7 @@ public class AddressBookMain {
         System.out.println("7. View Persion By State");
         System.out.println("8. Get Person Mobile Number");
         System.out.println("9. Sorting by Person Name");
-        System.out.println("10. Sorting by city or state or zip");
+        System.out.println("10. View Address Book File");
         return sc.nextInt();
     }
 }

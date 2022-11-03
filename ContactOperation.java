@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ public class ContactOperation {
     static String phoneNumber;
     static String email;
     static Scanner sc = new Scanner(System.in);
+    static File file = new File("Address_Books.txt");
 
     public static String getFirstName() {
         return firstName;
@@ -41,16 +43,14 @@ public class ContactOperation {
         return email;
     }
 
-
-    public static void addContact(HashMap contactHashMap) {
+    public static void addContact(HashMap<String, Contacts> contactHashMap) throws IOException {
         System.out.println("Enter address book Name");
         String addressBookName = sc.next();
         System.out.println("Enter First Name ");
         firstName = sc.next();
         contactHashMap.values().stream().forEach(p -> {
-            if (p.equals(firstName)) {
+            if (p.firstName.equals(firstName)) {
                 System.out.println("Contact Already Exists");
-                return;
             }
         });
         System.out.println("Enter Last Name ");
@@ -65,16 +65,31 @@ public class ContactOperation {
         phoneNumber = sc.next();
         System.out.println("Enter Email Id");
         email = sc.next();
+        PrintWriter pw = new PrintWriter(file);
         if (contactHashMap.containsKey(addressBookName)) {
             System.out.println("AddressBookName Already exists");
             System.out.println("Enter Another Name Which is not Available in following list");
             System.out.println(contactHashMap.keySet());
             addressBookName = sc.next();
             contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phoneNumber, email));
+            for (Map.Entry<String, Contacts> entry : contactHashMap.entrySet()) {
+                pw.println(entry.getKey() + " : " + entry.getValue());
+            }
+            pw.flush();
         } else {
             contactHashMap.put(addressBookName, new Contacts(firstName, lastName, city, state, zip, phoneNumber, email));
+            for (Map.Entry<String, Contacts> entry : contactHashMap.entrySet()) {
+                pw.println(entry.getKey() + " : " + entry.getValue());
+            }
+            pw.flush();
         }
+        FileReader fr = new FileReader(file);
+        viewAddressBookFile(fr);
+    }
 
+    private static void viewAddressBookFile(FileReader fr) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(fr);
+        bufferedReader.readLine();
     }
 
     public static void editContact(String tempAddressBook, HashMap contactHashMap) {
@@ -143,7 +158,6 @@ public class ContactOperation {
 
         if (listByCity.isEmpty()) {
             System.out.println("No Such contact Found");
-            return;
         } else {
             System.out.println(listByCity);
         }
@@ -156,7 +170,6 @@ public class ContactOperation {
 
         if (listByState.isEmpty()) {
             System.out.println("No Such contact Found");
-            return;
         } else {
             System.out.println(listByState);
         }
@@ -169,7 +182,6 @@ public class ContactOperation {
 
         if (listbyCity.isEmpty()) {
             System.out.println("No Such contact Found");
-            return;
         } else {
             for (int i = 0; i < listbyCity.size(); i++) {
                 System.out.println("Name = " + listbyCity.get(i).firstName + " " + listbyCity.get(i).lastName);
@@ -228,6 +240,14 @@ public class ContactOperation {
                 List<Contacts> listByZipCode = contactsHashMap.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getZip().compareTo(secondPerson.getZip())).collect(Collectors.toList());
                 System.out.println(listByZipCode);
                 break;
+        }
+    }
+
+    public void vewAddressBook() throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String contactfromFile;
+        while ((contactfromFile = br.readLine()) != null) {
+            System.out.println(contactfromFile);
         }
     }
 }
